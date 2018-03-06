@@ -1098,11 +1098,11 @@ class Battle extends Dex.ModdedDex {
 			statuses.push({status: item, callback: item[callbackType], statusData: thing.itemData, end: thing.clearItem, thing: thing});
 			this.resolveLastPriority(statuses, callbackType);
 		}
-		let baseSpecies = this.getEffect(thing.template.baseSpecies);
+		let species = thing.baseTemplate;
 		// @ts-ignore
-		if (baseSpecies[callbackType] !== undefined) {
+		if (species[callbackType] !== undefined) {
 			// @ts-ignore
-			statuses.push({status: baseSpecies, callback: baseSpecies[callbackType], statusData: thing.speciesData, end: function () {}, thing: thing});
+			statuses.push({status: species, callback: species[callbackType], statusData: thing.speciesData, end: function () {}, thing: thing});
 			this.resolveLastPriority(statuses, callbackType);
 		}
 
@@ -1696,7 +1696,7 @@ class Battle extends Dex.ModdedDex {
 		const ruleTable = this.getRuleTable(this.getFormat());
 		if (ruleTable.has('endlessbattleclause')) {
 			if (oneStale) {
-				let activationWarning = ` - If all active Pokemon go in an endless loop, Endless Battle Clause will activate.`;
+				let activationWarning = ` - If all active Pok\u00e9mon go in an endless loop, Endless Battle Clause will activate.`;
 				if (allStale) activationWarning = ``;
 				let loopReason = ``;
 				switch (oneStale.isStaleSource) {
@@ -1727,7 +1727,7 @@ class Battle extends Dex.ModdedDex {
 				this.firstStaleWarned = true;
 			}
 			if (allStale) {
-				this.add('message', `All active Pokemon are in an endless loop. Endless Battle Clause activated!`);
+				this.add('message', `All active Pok\u00e9mon are in an endless loop. Endless Battle Clause activated!`);
 				let leppaPokemon = null;
 				for (const side of this.sides) {
 					for (const pokemon of side.pokemon) {
